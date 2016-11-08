@@ -4,7 +4,7 @@ class Contactos extends CI_Controller{
     /**
      * Funcion contructor de la clase
      * 
-     * @autor Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
      * @param none
      * @return none
      * @version 1.0
@@ -13,7 +13,14 @@ class Contactos extends CI_Controller{
         parent::__construct();
         $this->load->model('Model_contactos');
     }
-    
+    /**
+     * Funcion inicial de la clase
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
     public function index(){
         $data['titulo']='Pagina  principal';
         $this->load->view('plantilla/header',$data);
