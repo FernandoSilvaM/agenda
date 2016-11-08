@@ -1,3 +1,5 @@
+<!-- Parametros de Bootstrap-->
+
 <!DOCTYPE html>
 <html lang="es">
   <head>

@@ -11,7 +11,7 @@ class Contactos extends CI_Controller{
      */
     function __construct() {
         parent::__construct();
-        $this->load->model('Model_contactos');
+        $this->load->model('model_contactos');
     }
     /**
      * Funcion inicial de la clase
@@ -22,17 +22,41 @@ class Contactos extends CI_Controller{
      * @version 1.0
      */
     public function index(){
-        $data['titulo']='Pagina  principal';
-        $this->load->view('plantilla/header',$data);
-        $this->load->view('contactos/index');
+        $data['titulo']='Pagina principal';
+        $data['dataContactos']= $this->model_contactos->obtenerTodo();
+       
+        
+        $this->load->view('plantilla/header', $data);
+        $this->load->view('contactos/index', $data);
         $this->load->view('plantilla/footer');
     }
+    
+    /**
+     * Funcion para cargar la vista de agregar nuevo contacto
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
     public function agregar(){
         $data['titulo']='Agregar Nuevo Contacto';
         $this->load->view('plantilla/header',$data);
         $this->load->view('contactos/agregar');
         $this->load->view('plantilla/footer');
     }
+    
+    /**
+     * Funcion para rectificar que los campos esten completamente diligenciados, capturando
+     * por medio del metodo post lo que se ingrese en las claves que se le
+     * asginaron a los campos de la base de datos, dirijiendolo a modelo_contactos a la 
+     * funcion insertar para que haga el proceso de guardarlos en la tabla contactos de la base de datos.
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
     public function agregarContacto(){
         $this->form_validation->set_rules('nnombre','Nombre','required');
         $this->form_validation->set_rules('ndireccion','Direccion','required');
@@ -40,7 +64,7 @@ class Contactos extends CI_Controller{
         
         if($this->form_validation->run()==FALSE){
             
-            $data['titulo']='Agregar Nuevo Contacto';
+            $data['titulo']='Agregar Nuevo Contacto Probando';
             $this->load->view('plantilla/header',$data);
             $this->load->view('contactos/agregar');
             $this->load->view('plantilla/footer');
@@ -51,8 +75,8 @@ class Contactos extends CI_Controller{
               'Direccion'=>$this->input->post('ndireccion'),
               'Telefono'=>$this->input->post('ntelefono')                
             );                    
-            $this->Model_contactos->insertar($data);
-            redirect(base_url(),'contactos/');
+            $this->model_contactos->insertar($data);
+            redirect(base_url(), 'Contactos/');
         }
     }
 }
