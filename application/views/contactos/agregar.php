@@ -43,6 +43,7 @@
             <?php echo validation_errors(); ?>
     </div>
 </div>
+    
     <!--Cerrar formulario-->
     <?php echo form_close(); ?>
 </div>

@@ -77,7 +77,7 @@ class Contactos extends CI_Controller{
             );                    
             $this->model_contactos->insertar($data);
             redirect(base_url(), 'Contactos/');
-        }
+    }
     }
 }
 ?>

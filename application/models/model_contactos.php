@@ -21,6 +21,7 @@ class Model_contactos extends CI_Model{
      * @return none
      * @version 1.0
      */
+    
     function obtenerTodo(){
         $query=$this->db->get('contactos');
         

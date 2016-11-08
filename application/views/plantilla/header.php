@@ -10,7 +10,7 @@
   <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
     <body>
-        <!-- Menu de navegacion-->
+        <!-- Menu de navegacion de la pagina-->
         <nav class="navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
