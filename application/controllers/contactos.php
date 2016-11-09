@@ -49,7 +49,7 @@ class Contactos extends CI_Controller{
     /**
      * Funcion para rectificar que los campos esten completamente diligenciados, capturando
      * por medio del metodo post lo que se ingrese en las claves que se le
-     * asginaron a los campos de la base de datos, dirijiendolo a modelo_contactos a la 
+     * asginaron a los campos de la base de datos, dirijiendolo al modelo_contactos a la 
      * funcion insertar para que haga el proceso de guardarlos en la tabla contactos de la base de datos.
      * 
      * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
@@ -80,20 +80,23 @@ class Contactos extends CI_Controller{
     }
     }
     
-    public function actualizarContacto(){
-        $data['titulo']='Actualizar Contacto';
-        $this->load->view('plantilla/header',$data);
-        $this->load->view('contactos/actualizar');
-        $this->load->view('plantilla/footer');
-    }
+    /**
+     * Funcion para eliminar un contacto llevandolo al model_contactos y luego a la funcion eliminar
+     * para que haga el proceso de eliminacion de contacto
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
      public function borrar(){
+        $data['titulo']='Eliminar Contacto';
+        $this->load->view('plantilla/header',$data);
+        $this->load->view('contactos/eliminar');
+         
+        $id=$this->input->post('nnombre');
+        $this->model_contactos->eliminar($id);
         
-         $this->load->view('contactos/eliminar');
-         /**$data=array(
-              'Nombre'=>$this->input->post('nnombre'));
-        $this->model_contactos->eliminar($data);
-        redirect(base_url(), 'Contactos/');
-          */
     }
 }
 ?>

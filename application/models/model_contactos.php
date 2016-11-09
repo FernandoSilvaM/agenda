@@ -32,8 +32,16 @@ class Model_contactos extends CI_Model{
         
     }
     
+    /**
+     * Funcion para eliminar el dato seleccionado de la tabla contactos
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
     function eliminar($id){
-        $this->db->delete('contactos',array('Nombre'=>$data));
+        $this->db->delete('contactos',array('Nombre'=>$id));
     }
 
     }
