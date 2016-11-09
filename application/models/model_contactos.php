@@ -29,7 +29,6 @@ class Model_contactos extends CI_Model{
         
         return $valorRetorno;
         
-        
     }
     
     /**
@@ -42,6 +41,42 @@ class Model_contactos extends CI_Model{
      */
     function eliminar($id){
         $this->db->delete('contactos',array('Nombre'=>$id));
+    }
+    
+    /**
+     * Funcion para buscar datos en la tabla contactos **POR REVISAR Y ARREGLAR**
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
+    function buscar($query){
+        $this->db->like('Nombre', $query);
+        $query=$this->db->get('contactos');
+        
+        $valorRetorno = $query->result();
+        
+        return $valorRetorno;
+    }
+    
+    /**
+     * Funcion para actualizar los datos de la tabla contactos **POR REVISAR Y ARREGLAR**
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
+    function actualizarDatos($data){
+        $datos=array(
+              'Nombre'=>$data['nnombre'],
+              'Direccion'=>$data['ndireccion'],
+              'Telefono'=>$data['ntelefono']  
+        );
+        $this->db->where('Nombre',$data);
+        $query=$this->db->update('contactos',$datos);
+        
     }
 
     }

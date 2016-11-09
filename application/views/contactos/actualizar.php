@@ -2,7 +2,7 @@
 <br/>
 <!--Formulario para agregar contactos-->
 <div class="container">
-    <?php echo form_open(base_url().'contactos/actualizarContacto');?>
+    <?php echo form_open(base_url().'contactos/editar/'.$id);?>
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">

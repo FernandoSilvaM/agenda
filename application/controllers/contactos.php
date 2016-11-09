@@ -95,8 +95,67 @@ class Contactos extends CI_Controller{
         $this->load->view('contactos/eliminar');
          
         $id=$this->input->post('nnombre');
-        $this->model_contactos->eliminar($id);
+        $this->model_contactos->eliminar($id);  
+    }
+    
+    /**
+     * Funcion para editar datos de la tabla contactos
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
+    public function editar(){
+        $data['id']=$this->uri->segment(3);
+        $data['contactos']=$this->model_contactos->actualizarDatos($data['id']);
+        $data['titulo']='Buscar Contacto';
+        $this->load->view('plantilla/header');
+        $this->load->view('contactos/actualizar',$data);
+    }
+    /**
+     * Funcion para actualizar los datos de la tabla contactos
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
+    public function actualizar(){
+        $data=array(
+              'Nombre'=>$this->input->post('nnombre'),
+              'Direccion'=>$this->input->post('ndireccion'),
+              'Telefono'=>$this->input->post('ntelefono')                
+            );        
+        $this->model_contactos->actualizarDatos($this->uri->segment(3),$data);
+    }
+
+    /**
+     * Funcion para buscar los contactos de la tabla
+     * 
+     * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
+     * @param none
+     * @return none
+     * @version 1.0
+     */
+        public function buscar(){
+        $data=array();
+        $query=$this->input->get('query',TRUE);
         
+        if($query){
+         $resultado=$this->model_contactos->buscar(trim($query));
+         if($resultado !=FALSE){
+             $data=array('resultado'=>$resultado);
+         }
+         else{
+             $data = array('resultado'=>'');
+             
+         }
+        }
+        
+        $data['titulo']='Buscar Contacto';
+        $this->load->view('plantilla/header');
+        $this->load->view('contactos/buscar',$data);
     }
 }
 ?>
