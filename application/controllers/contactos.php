@@ -79,5 +79,21 @@ class Contactos extends CI_Controller{
             redirect(base_url(), 'Contactos/');
     }
     }
+    
+    public function actualizarContacto(){
+        $data['titulo']='Actualizar Contacto';
+        $this->load->view('plantilla/header',$data);
+        $this->load->view('contactos/actualizar');
+        $this->load->view('plantilla/footer');
+    }
+     public function borrar(){
+        
+         $this->load->view('contactos/eliminar');
+         /**$data=array(
+              'Nombre'=>$this->input->post('nnombre'));
+        $this->model_contactos->eliminar($data);
+        redirect(base_url(), 'Contactos/');
+          */
+    }
 }
 ?>

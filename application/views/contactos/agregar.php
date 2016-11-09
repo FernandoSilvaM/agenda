@@ -33,7 +33,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-success pull-right">Guardar</button> 
+            <br><button type="submit" class="btn btn-success pull-right">Guardar</button> 
         </div>
     </div>
      

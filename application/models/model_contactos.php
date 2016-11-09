@@ -31,5 +31,10 @@ class Model_contactos extends CI_Model{
         
         
     }
-}
+    
+    function eliminar($id){
+        $this->db->delete('contactos',array('Nombre'=>$data));
+    }
+
+    }
 ?>

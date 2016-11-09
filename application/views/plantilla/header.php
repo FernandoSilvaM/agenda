@@ -26,7 +26,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="<?php echo base_url() ?>Contactos"/>Contactos</a></li>
                     <li><a href="<?php echo base_url() ?>Contactos/agregar"/>Agregar</a></li>
-                    <li><a href="<?php echo base_url() ?>Contactos/actualizar"/>Actualizar</a></li>
+                    <li><a href="<?php echo base_url() ?>Contactos/actualizarContacto"/>Actualizar</a></li>
+                    <li><a href="<?php echo base_url() ?>Contactos/borrar"/>Eliminar</a></li>
                 </ul>
             </div>
         </div>            

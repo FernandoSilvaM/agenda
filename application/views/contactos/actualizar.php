@@ -1,8 +1,8 @@
-<h1 align='center'>Pagina para actualizar contactos</h1>
+<h1 align='center'>Pagina para agregar contactos</h1>
 <br/>
 <!--Formulario para agregar contactos-->
 <div class="container">
-    <?php echo form_open(base_url().'');?>
+    <?php echo form_open(base_url().'contactos/actualizarContacto');?>
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">
@@ -33,7 +33,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-success pull-right">Guardar</button> 
+            <br><button type="submit" class="btn btn-success pull-right">Actualizar</button> 
         </div>
     </div>
      
