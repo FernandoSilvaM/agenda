@@ -1,8 +1,8 @@
-<h1 align='center'>Pagina para agregar contactos</h1>
+<h1 align='center'>Pagina para actualizar contactos</h1>
 <br/>
 <!--Formulario para agregar contactos-->
 <div class="container">
-    <?php echo form_open(base_url().'contactos/editar/'.$id);?>
+    <?php echo form_open(base_url().'contactos/actualizar/'.$id);?>
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">

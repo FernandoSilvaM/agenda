@@ -93,6 +93,7 @@ class Contactos extends CI_Controller{
         $data['titulo']='Eliminar Contacto';
         $this->load->view('plantilla/header',$data);
         $this->load->view('contactos/eliminar');
+        $this->load->view('plantilla/footer');
          
         $id=$this->input->post('nnombre');
         $this->model_contactos->eliminar($id);  
@@ -108,10 +109,13 @@ class Contactos extends CI_Controller{
      */
     public function editar(){
         $data['id']=$this->uri->segment(3);
-        $data['contactos']=$this->model_contactos->actualizarDatos($data['id']);
-        $data['titulo']='Buscar Contacto';
-        $this->load->view('plantilla/header');
+        $data['contacto']=$this->model_contactos->obtenerContacto($data['id']);
+        
+        $data['titulo']='Editar Contacto';
+        $this->load->view('plantilla/header',$data);
         $this->load->view('contactos/actualizar',$data);
+        $this->load->view('plantilla/footer');
+        
     }
     /**
      * Funcion para actualizar los datos de la tabla contactos
@@ -128,6 +132,7 @@ class Contactos extends CI_Controller{
               'Telefono'=>$this->input->post('ntelefono')                
             );        
         $this->model_contactos->actualizarDatos($this->uri->segment(3),$data);
+        redirect(base_url(), 'Contactos/');
     }
 
     /**
@@ -139,23 +144,13 @@ class Contactos extends CI_Controller{
      * @version 1.0
      */
         public function buscar(){
-        $data=array();
-        $query=$this->input->get('query',TRUE);
+        $data['id']=$this->input->post('nnombre');
+        $data['contacto']=$this->model_contactos->obtenerContacto($data['id']);  
         
-        if($query){
-         $resultado=$this->model_contactos->buscar(trim($query));
-         if($resultado !=FALSE){
-             $data=array('resultado'=>$resultado);
-         }
-         else{
-             $data = array('resultado'=>'');
-             
-         }
-        }
-        
-        $data['titulo']='Buscar Contacto';
-        $this->load->view('plantilla/header');
+        $data['titulo']='Editar Contacto';
+        $this->load->view('plantilla/header',$data);
         $this->load->view('contactos/buscar',$data);
+        $this->load->view('plantilla/footer');
     }
 }
 ?>

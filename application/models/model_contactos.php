@@ -51,13 +51,9 @@ class Model_contactos extends CI_Model{
      * @return none
      * @version 1.0
      */
-    function buscar($query){
-        $this->db->like('Nombre', $query);
+    function obtenerContacto($id){
+        $this->db->where('id', $id);
         $query=$this->db->get('contactos');
-        
-        $valorRetorno = $query->result();
-        
-        return $valorRetorno;
     }
     
     /**
@@ -68,13 +64,13 @@ class Model_contactos extends CI_Model{
      * @return none
      * @version 1.0
      */
-    function actualizarDatos($data){
+    function actualizarDatos($id,$data){
         $datos=array(
               'Nombre'=>$data['nnombre'],
               'Direccion'=>$data['ndireccion'],
               'Telefono'=>$data['ntelefono']  
         );
-        $this->db->where('Nombre',$data);
+        $this->db->where('id',$id);
         $query=$this->db->update('contactos',$datos);
         
     }
