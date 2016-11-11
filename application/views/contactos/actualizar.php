@@ -2,12 +2,12 @@
 <br/>
 <!--Formulario para agregar contactos-->
 <div class="container">
-    <?php echo form_open(base_url().'contactos/actualizar/'.$id);?>
+    <?php echo form_open(base_url().'contactos/actualizar/');?>
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Nombre:</span>
-                <input type="text" class="form-control" placeholder="Tu nombre aqui:" name="nnombre" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Tu nombre aqui:" name="nnombre" aria-describedby="basic-addon1" value="<?php echo $infoContacto[0]->Nombre  ?>">
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Direccion:</span>
-                <input type="text" class="form-control" placeholder="Tu direccion aqui:" name="ndireccion" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Tu direccion aqui:" name="ndireccion" aria-describedby="basic-addon1" value="<?php echo $infoContacto[0]->Direccion  ?>">
             </div>
         </div>
     </div>
@@ -26,13 +26,14 @@
         <div class="col-md-12">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Telefono:</span>
-                <input type="text" class="form-control" placeholder="Tu telefono aqui:" name="ntelefono" aria-describedby="basic-addon1">
+                <input type="label" class="form-control" placeholder="Tu telefono aqui:" name="ntelefono" aria-describedby="basic-addon1" value="<?php echo $infoContacto[0]->Telefono  ?>">
             </div>
         </div>
     </div>
     
     <div class="row">
         <div class="col-md-12">
+            <input type='hidden' value='<?php echo $infoContacto[0]->id  ?>' name='idUsuario' id='idUsuario'>
             <br><button type="submit" class="btn btn-success pull-right">Actualizar</button> 
         </div>
     </div>

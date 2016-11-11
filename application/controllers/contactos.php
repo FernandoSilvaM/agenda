@@ -107,14 +107,17 @@ class Contactos extends CI_Controller{
      * @return none
      * @version 1.0
      */
-    public function editar(){
-        $data['id']=$this->uri->segment(3);
-        $data['contacto']=$this->model_contactos->obtenerContacto($data['id']);
+    public function editar($pIdContacto){
+        $dataVista = array(
+          'infoContacto'  => $this->model_contactos->obtenerContacto($pIdContacto),
+            'titulo' => "Editar Contacto"
+        );
         
-        $data['titulo']='Editar Contacto';
-        $this->load->view('plantilla/header',$data);
-        $this->load->view('contactos/actualizar',$data);
+        
+        $this->load->view('plantilla/header',$dataVista);
+        $this->load->view('contactos/actualizar',$dataVista);
         $this->load->view('plantilla/footer');
+        
         
     }
     /**
@@ -126,13 +129,17 @@ class Contactos extends CI_Controller{
      * @version 1.0
      */
     public function actualizar(){
-        $data=array(
-              'Nombre'=>$this->input->post('nnombre'),
-              'Direccion'=>$this->input->post('ndireccion'),
-              'Telefono'=>$this->input->post('ntelefono')                
+        $dataActualizar=array(
+              'Nombre'=>$this->input->post('nnombre',TRUE),
+              'Direccion'=>$this->input->post('ndireccion',TRUE),
+              'Telefono'=>$this->input->post('ntelefono',TRUE)                
             );        
-        $this->model_contactos->actualizarDatos($this->uri->segment(3),$data);
+        $valorActualizar=$this->model_contactos->actualizarDatos($this->input->post('idUsuario',TRUE),$dataActualizar);
         redirect(base_url(), 'Contactos/');
+        
+        
+
+        
     }
 
     /**

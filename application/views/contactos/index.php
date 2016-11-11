@@ -19,6 +19,8 @@
                     echo 'Nombre: '.$row->Nombre."<br/>";
                     echo 'Direccion: '.$row->Direccion."<br/>";
                     echo 'Telefono: '.$row->Telefono."<br/>";
+                    echo '<a href="'.  base_url('Contactos/editar/'.$row->id).'">Editar</a><br>';
+                    echo '<a href="'.  base_url('Contactos/borrar/'.$row->id).'">Eliminar</a>';
                     echo "<br/><hr><br/>";
                 }
                 ?>
