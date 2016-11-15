@@ -2,7 +2,7 @@
 <br/>
 <!--Formulario para agregar contactos-->
 <div class="container">
-    <?php echo form_open(base_url().'contactos/agregarContacto');?>
+    <?php echo form_open(base_url() . 'contactos/agregarContacto'); ?>
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">
@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    
+
     <br/>
     <div class="row">
         <div class="col-md-12">
@@ -30,20 +30,20 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <br><button type="submit" class="btn btn-success pull-right">Guardar</button> 
         </div>
     </div>
-     
+
     <div class="row">
         <div class="col-md-12">
             <!--Linea para imprimir los errores-->
             <?php echo validation_errors(); ?>
+        </div>
     </div>
-</div>
-    
+
     <!--Cerrar formulario-->
     <?php echo form_close(); ?>
 </div>

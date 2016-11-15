@@ -1,8 +1,9 @@
 <?php
-class Contactos extends CI_Controller{
-    
+
+class Contactos extends CI_Controller {
+
     /**
-     * Funcion contructor de la clase
+     * Funcion constructor de la clase
      * 
      * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
      * @param none
@@ -13,6 +14,7 @@ class Contactos extends CI_Controller{
         parent::__construct();
         $this->load->model('model_contactos');
     }
+
     /**
      * Funcion inicial de la clase
      * 
@@ -21,16 +23,16 @@ class Contactos extends CI_Controller{
      * @return none
      * @version 1.0
      */
-    public function index(){
-        $data['titulo']='Pagina principal';
-        $data['dataContactos']= $this->model_contactos->obtenerTodo();
-       
-        
+    public function index() {
+        $data['titulo'] = 'Pagina principal';
+        $data['dataContactos'] = $this->model_contactos->obtenerTodo();
+
+
         $this->load->view('plantilla/header', $data);
         $this->load->view('contactos/index', $data);
         $this->load->view('plantilla/footer');
     }
-    
+
     /**
      * Funcion para cargar la vista de agregar nuevo contacto
      * 
@@ -39,13 +41,13 @@ class Contactos extends CI_Controller{
      * @return none
      * @version 1.0
      */
-    public function agregar(){
-        $data['titulo']='Agregar Nuevo Contacto';
-        $this->load->view('plantilla/header',$data);
+    public function agregar() {
+        $data['titulo'] = 'Agregar Nuevo Contacto';
+        $this->load->view('plantilla/header', $data);
         $this->load->view('contactos/agregar');
         $this->load->view('plantilla/footer');
     }
-    
+
     /**
      * Funcion para rectificar que los campos esten completamente diligenciados, capturando
      * por medio del metodo post lo que se ingrese en las claves que se le
@@ -57,29 +59,28 @@ class Contactos extends CI_Controller{
      * @return none
      * @version 1.0
      */
-    public function agregarContacto(){
-        $this->form_validation->set_rules('nnombre','Nombre','required');
-        $this->form_validation->set_rules('ndireccion','Direccion','required');
-        $this->form_validation->set_rules('ntelefono','Telefono','required');
-        
-        if($this->form_validation->run()==FALSE){
-            
-            $data['titulo']='Agregar Nuevo Contacto Probando';
-            $this->load->view('plantilla/header',$data);
+    public function agregarContacto() {
+        $this->form_validation->set_rules('nnombre', 'Nombre', 'required');
+        $this->form_validation->set_rules('ndireccion', 'Direccion', 'required');
+        $this->form_validation->set_rules('ntelefono', 'Telefono', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $data['titulo'] = 'Agregar Nuevo Contacto';
+            $this->load->view('plantilla/header', $data);
             $this->load->view('contactos/agregar');
             $this->load->view('plantilla/footer');
-        }
-        else{
-            $data=array(
-              'Nombre'=>$this->input->post('nnombre'),
-              'Direccion'=>$this->input->post('ndireccion'),
-              'Telefono'=>$this->input->post('ntelefono')                
-            );                    
+        } else {
+            $data = array(
+                'Nombre' => $this->input->post('nnombre'),
+                'Direccion' => $this->input->post('ndireccion'),
+                'Telefono' => $this->input->post('ntelefono')
+            );
             $this->model_contactos->insertar($data);
             redirect(base_url(), 'Contactos/');
+        }
     }
-    }
-    
+
     /**
      * Funcion para eliminar un contacto llevandolo al model_contactos y luego a la funcion eliminar
      * para que haga el proceso de eliminacion de contacto
@@ -89,57 +90,53 @@ class Contactos extends CI_Controller{
      * @return none
      * @version 1.0
      */
-     public function borrar(){
-        $data['titulo']='Eliminar Contacto';
-        $this->load->view('plantilla/header',$data);
-        $this->load->view('contactos/eliminar');
+    public function borrar($pBorrar) {
+        $dataBorrar['titulo'] = 'Eliminar Contacto';
+        $this->load->view('plantilla/header', $dataBorrar);
         $this->load->view('plantilla/footer');
-         
-        $id=$this->input->post('nnombre');
-        $this->model_contactos->eliminar($id);  
+
+        $this->model_contactos->eliminar($pBorrar);
+        redirect(base_url(), 'Contactos/');
     }
-    
+
     /**
-     * Funcion para editar datos de la tabla contactos
+     * Funcion que carga los datos de la tabla contactos llevandolo al model_contactos y luego 
+     * a la funcion obtenerContacto para que los muestre en la vista actualizar
      * 
      * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
      * @param none
      * @return none
      * @version 1.0
      */
-    public function editar($pIdContacto){
+    public function editar($pIdContacto) {
         $dataVista = array(
-          'infoContacto'  => $this->model_contactos->obtenerContacto($pIdContacto),
+            'infoContacto' => $this->model_contactos->obtenerContacto($pIdContacto),
             'titulo' => "Editar Contacto"
         );
-        
-        
-        $this->load->view('plantilla/header',$dataVista);
-        $this->load->view('contactos/actualizar',$dataVista);
+
+
+        $this->load->view('plantilla/header', $dataVista);
+        $this->load->view('contactos/actualizar', $dataVista);
         $this->load->view('plantilla/footer');
-        
-        
     }
+
     /**
-     * Funcion para actualizar los datos de la tabla contactos
+     * Funcion para actualizar los datos de la tabla contactos, tomando los nuevos datos 
+     * que se ingresan para guardar y actualizar en la base de datos 
      * 
      * @author Cesar Fernando Silva <cesar.silvam97@gmail.com>
      * @param none
      * @return none
      * @version 1.0
      */
-    public function actualizar(){
-        $dataActualizar=array(
-              'Nombre'=>$this->input->post('nnombre',TRUE),
-              'Direccion'=>$this->input->post('ndireccion',TRUE),
-              'Telefono'=>$this->input->post('ntelefono',TRUE)                
-            );        
-        $valorActualizar=$this->model_contactos->actualizarDatos($this->input->post('idUsuario',TRUE),$dataActualizar);
+    public function actualizar() {
+        $dataActualizar = array(
+            'Nombre' => $this->input->post('nnombre', TRUE),
+            'Direccion' => $this->input->post('ndireccion', TRUE),
+            'Telefono' => $this->input->post('ntelefono', TRUE)
+        );
+        $valorActualizar = $this->model_contactos->actualizarDatos($this->input->post('idUsuario', TRUE), $dataActualizar);
         redirect(base_url(), 'Contactos/');
-        
-        
-
-        
     }
 
     /**
@@ -150,14 +147,27 @@ class Contactos extends CI_Controller{
      * @return none
      * @version 1.0
      */
-        public function buscar(){
-        $data['id']=$this->input->post('nnombre');
-        $data['contacto']=$this->model_contactos->obtenerContacto($data['id']);  
-        
-        $data['titulo']='Editar Contacto';
-        $this->load->view('plantilla/header',$data);
-        $this->load->view('contactos/buscar',$data);
+    public function buscar() {
+        $dataBuscar = array();
+
+        $datosBuscar = $this->input->post('datosBuscar', TRUE);
+
+        if ($datosBuscar) {
+            $result = $this->model_contactos->buscarContacto($datosBuscar);
+            if ($result != FALSE) {
+                $dataBuscar = array('result' => $result);
+            } else {
+                $dataBuscar = array('result' => '');
+            }
+        } else {
+            $dataBuscar = array('result' => '');
+        }
+        $dataBuscar['titulo'] = 'Buscar Contacto';
+        $this->load->view('plantilla/header', $dataBuscar);
+        $this->load->view('contactos/buscar', $dataBuscar);
         $this->load->view('plantilla/footer');
     }
+
 }
+
 ?>
