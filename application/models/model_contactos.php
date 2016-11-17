@@ -11,7 +11,7 @@ class Model_contactos extends CI_Model {
      * @version 1.0
      */
     function insertar($data) {
-        $this->db->insert('contactos', $data);
+        $this->db->insert('contacto', $data);
     }
 
     /**
@@ -23,7 +23,7 @@ class Model_contactos extends CI_Model {
      * @version 1.0
      */
     function obtenerTodo() {
-        $query = $this->db->get('contactos');
+        $query = $this->db->get('contacto');
 
         $valorRetorno = $query->result();
 
@@ -39,7 +39,7 @@ class Model_contactos extends CI_Model {
      * @version 1.0
      */
     function eliminar($pBorrar) {
-        $this->db->delete('contactos', array('Id' => $pBorrar));
+        $this->db->delete('contacto', array('con_id' => $pBorrar));
     }
 
     /**
@@ -51,8 +51,8 @@ class Model_contactos extends CI_Model {
      * @version 1.0
      */
     function obtenerContacto($pIdEditar) {
-        $this->db->where('id', $pIdEditar);
-        $query = $this->db->get('contactos');
+        $this->db->where('con_id', $pIdEditar);
+        $query = $this->db->get('contacto');
         return $query->result();
     }
 
@@ -66,8 +66,8 @@ class Model_contactos extends CI_Model {
      */
     function actualizarDatos($pIdContacto, $pDataActualizar) {
 
-        $this->db->where('id', $pIdContacto);
-        $query = $this->db->update('contactos', $pDataActualizar);
+        $this->db->where('con_id', $pIdContacto);
+        $query = $this->db->update('contacto', $pDataActualizar);
         return $query;
     }
 
@@ -80,8 +80,8 @@ class Model_contactos extends CI_Model {
      * @version 1.0
      */
     function buscarContacto($datosBuscar) {
-        $this->db->like('Nombre', $datosBuscar);
-        $datosBuscar = $this->db->get('contactos');
+        $this->db->like('con_nombre', $datosBuscar);
+        $datosBuscar = $this->db->get('contacto');
         if ($datosBuscar->num_rows() > 0) {
             return $datosBuscar;
         } else {
@@ -90,5 +90,3 @@ class Model_contactos extends CI_Model {
     }
 
 }
-
-?>

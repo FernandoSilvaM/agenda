@@ -27,12 +27,12 @@
                 if ($result) {
                     foreach ($result->result() as $row) {
 
-                        echo '<tr><td>' . $row->id . '</td>';
-                        echo '<td>' . $row->Nombre . '</td>';
-                        echo '<td>' . $row->Direccion . '</td>';
-                        echo '<td>' . $row->Telefono . '</td>';
-                        echo '<td><a href="' . base_url('Contactos/editar/' . $row->id) . '">Editar</a><br>';
-                        echo '<a href="' . base_url('Contactos/borrar/' . $row->id) . '">Eliminar</a></td></tr>';
+                        echo '<tr><td>' . $row->con_id . '</td>';
+                        echo '<td>' . $row->con_nombre . '</td>';
+                        echo '<td>' . $row->con_direccion . '</td>';
+                        echo '<td>' . $row->con_telefono . '</td>';
+                        echo '<td><a href="' . base_url('Contactos/editar/' . $row->con_id) . '">Editar</a><br>';
+                        echo '<a href="' . base_url('Contactos/borrar/' . $row->con_id) . '">Eliminar</a></td></tr>';
                         echo "<br/><hr><br/>";
                     }
                 }
