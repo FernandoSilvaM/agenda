@@ -7,8 +7,11 @@
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
+                        <th>Apellido</th>
                         <th>Dirección</th>
-                        <th>Telefono</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                     <?php
@@ -21,10 +24,17 @@
                      * @version 1.0
                      */
                     foreach ($dataContactos as $row) {
+                        $estado='Activo';
+                        if($row->est_id == 2):
+                            $estado='Inactivo';
+                        endif;                            
                         echo '<tr><td>' . $row->con_id . '</td>';
                         echo '<td>' . $row->con_nombre . '</td>';
+                        echo '<td>' . $row->con_apellido . '</td>';
                         echo '<td>' . $row->con_direccion . '</td>';
                         echo '<td>' . $row->con_telefono . '</td>';
+                        echo '<td>' . $row->con_email . '</td>';
+                        echo '<td>' . $estado . '</td>';
                         echo '<td><a href="' . base_url('Contactos/editar/' . $row->con_id) . '"><span class="glyphicon glyphicon-pencil"></span>Editar</a><br>';
                         echo '<a href="' . base_url('Contactos/borrar/' . $row->con_id) . '"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar</a></td></tr>';
                         

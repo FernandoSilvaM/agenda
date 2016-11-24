@@ -26,7 +26,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="<?php echo base_url() ?>Contactos/agregar"/>Agregar</a></li>
                         <li><a href="<?php echo base_url() ?>Contactos/buscar"/>Buscar</a></li>
-                        <li><a href="<?php echo base_url() ?>Excel"/>Descargar Excel</a></li>
+                        <li><a href="<?php echo base_url() ?>Excel"/>Descargar Reporte Excel</a></li>
+                        <li><a href="<?php echo base_url() ?>Word"/>Descargar Reporte Word</a></li>
                     </ul>
                 </div>
             </div>            

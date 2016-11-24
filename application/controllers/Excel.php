@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 class Excel extends CI_Controller {
 
@@ -40,30 +40,40 @@ class Excel extends CI_Controller {
         $this->phpexcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', 'Id')
                 ->setCellValue('B1', 'Nombre')
-                ->setCellValue('C1', 'Direccion')
-                ->setCellValue('D1', 'Telefono');
+                ->setCellValue('C1', 'Apellido')
+                ->setCellValue('D1', 'Direccion')
+                ->setCellValue('E1', 'Telefono')
+                ->setCellValue('F1', 'Correo')
+                ->setCellValue('G1', 'Estado');
 
         // La librería puede manejar la codificación de caracteres UTF-8
-        
         //obtengo la información de los contactos
         $dataContacto = $this->model_contactos->obtenerTodo();
         //valido si la data trae resultados
         if (!is_null($dataContacto)):
             //creo la variable de conteo
             $valorConteo = 2;
-            
+
             //itero la data
             foreach ($dataContacto as $itemContacto):
+                $estado = 'activo';
+                if ($itemContacto->est_id == 2):
+                    $estado = 'inactivo';
+                endif;
+
                 //agrego la fila con los datos del contacto
                 $this->phpexcel->setActiveSheetIndex(0)
-                        ->setCellValue('A'.$valorConteo, $itemContacto->con_id)
-                        ->setCellValue('B'.$valorConteo, $itemContacto->con_nombre)
-                        ->setCellValue('C'.$valorConteo, $itemContacto->con_direccion)
-                        ->setCellValue('D'.$valorConteo, $itemContacto->con_telefono);
+                        ->setCellValue('A' . $valorConteo, $itemContacto->con_id)
+                        ->setCellValue('B' . $valorConteo, $itemContacto->con_nombre)
+                        ->setCellValue('C' . $valorConteo, $itemContacto->con_apellido)
+                        ->setCellValue('D' . $valorConteo, $itemContacto->con_direccion)
+                        ->setCellValue('E' . $valorConteo, $itemContacto->con_telefono)
+                        ->setCellValue('F' . $valorConteo, $itemContacto->con_email)
+                        ->setCellValue('G' . $valorConteo, $estado);
                 //aumento el valor de conteo
                 $valorConteo ++;
             endforeach;
-            
+
         endif;
 
 
@@ -79,7 +89,7 @@ class Excel extends CI_Controller {
 
         // redireccionamos la salida al navegador del cliente (Excel2007)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="01simple.xlsx"');
+        header('Content-Disposition: attachment;filename="Contactos.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel2007');
